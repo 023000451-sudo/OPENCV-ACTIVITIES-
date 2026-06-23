@@ -2,8 +2,8 @@ import cv2
 import numpy as np
 
 # Open the image files.
-img1_color = cv2.imread("align.jpg")  # Image to be aligned.
-img2_color = cv2.imread("ref.jpg")    # Reference image.
+img1_color = cv2.imread("C:\\Users\\LENOVO\\Downloads\\OPENCV\\OPENCV-ACTIVITIES-\\data\\IMAGEN PARA ALINEAR .png")  # Image to be aligned.
+img2_color = cv2.imread("C:\\Users\\LENOVO\\Downloads\\OPENCV\\OPENCV-ACTIVITIES-\\data\\IMAGEN ORIGINAL.png")    # Reference image.
 
 # Convert to grayscale.
 img1 = cv2.cvtColor(img1_color, cv2.COLOR_BGR2GRAY)
@@ -28,7 +28,7 @@ matcher = cv2.BFMatcher(cv2.NORM_HAMMING, crossCheck = True)
 matches = matcher.match(d1, d2)
 
 # Sort matches on the basis of their Hamming distance.
-matches.sort(key = lambda x: x.distance)
+matches = sorted(matches, key = lambda x: x.distance)
 
 # Take the top 90 % matches forward.
 matches = matches[:int(len(matches)*0.9)]
@@ -51,4 +51,4 @@ transformed_img = cv2.warpPerspective(img1_color,
                     homography, (width, height))
 
 # Save the output.
-cv2.imwrite('output.jpg', transformed_img)
+cv2.imwrite('IMAGEN FINAL ALINEADA.png', transformed_img)
